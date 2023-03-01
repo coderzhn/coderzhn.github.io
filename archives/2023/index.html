@@ -422,8 +422,8 @@
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    第03章 用户与权限管理1. 用户管理1.1 登录MySQL服务器启动MySQL服务后，可以通过mysql命令来登录MySQL服务器，命令如下：
-mysql –h hostname|hostIP –P port –u username –p
+                                    1. 用户管理1.1 登录MySQL服务器启动MySQL服务后，可以通过mysql命令来登录MySQL服务器，命令如下：
+mysql –h hostname|hostIP –P port –u username –p DatabaseNam
                                 
                             </div>
                             <div class="publish-info">
@@ -479,8 +479,7 @@ mysql –h hostname|hostIP –P port –u username –p
                         <a href="/2023/03/01/%E7%AC%AC02%E7%AB%A0%20MySQL%E7%9A%84%E6%95%B0%E6%8D%AE%E7%9B%AE%E5%BD%95/">
                             <div class="card-image">
                                 
-                                
-                                <img src="https://cdn.jsdelivr.net/gh/coderzhn/coderzhn.github.io/medias/featureimages/11.jpg" class="responsive-img" alt="第02章 MySQL的数据目录">
+                                <img src="https://raw.githubusercontent.com/coderzhn/coderzhn.github.io/main/mysql3.png" class="responsive-img" alt="第02章 MySQL的数据目录">
                                 
                                 <span class="card-title">第02章 MySQL的数据目录</span>
                             </div>
@@ -488,11 +487,11 @@ mysql –h hostname|hostIP –P port –u username –p
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    第02章 MySQL的数据目录1. MySQL8的主要目录结构find / -name mysql
+                                    1. MySQL8的主要目录结构find / -name mysql
 
 1.1 数据库文件的存放路径show variables like 'datadir'; # /var/lib/mysql/
 
-1.2 相
+1.2 相关命令目录相关命令目录：/us
                                 
                             </div>
                             <div class="publish-info">
@@ -555,13 +554,15 @@ mysql –h hostname|hostIP –P port –u username –p
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    第01章 Linux下MySQL的安装与使用1. 安装前说明1.1 查看是否安装过MySQL
+                                    1. 安装前说明1.1 查看是否安装过MySQL
 如果你是用rpm安装, 检查一下RPM PACKAGE：
 
 rpm -qa | grep -i mysql # -i 忽略大小写
 
 
-检查mysq
+检查mysql service：
+
+systemctl 
                                 
                             </div>
                             <div class="publish-info">

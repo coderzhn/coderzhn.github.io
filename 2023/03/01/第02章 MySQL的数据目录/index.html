@@ -5,11 +5,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="第02章 MySQL的数据目录, Zhn&amp;Blog">
-    <meta name="description" content="第02章 MySQL的数据目录1. MySQL8的主要目录结构find / -name mysql
+    <meta name="description" content="1. MySQL8的主要目录结构find / -name mysql
 
 1.1 数据库文件的存放路径show variables like &#39;datadir&#39;; # /var/lib/mysql/
 
-1.2 相">
+1.2 相关命令目录相关命令目录：/us">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -255,7 +255,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/coderzhn/coderzhn.github.io/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://raw.githubusercontent.com/coderzhn/coderzhn.github.io/main/mysql3.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -337,7 +337,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    717
+                    709
                 </div>
                 
 
@@ -362,7 +362,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="第02章-MySQL的数据目录"><a href="#第02章-MySQL的数据目录" class="headerlink" title="第02章 MySQL的数据目录"></a>第02章 MySQL的数据目录</h3><h4 id="1-MySQL8的主要目录结构"><a href="#1-MySQL8的主要目录结构" class="headerlink" title="1. MySQL8的主要目录结构"></a><strong>1. MySQL8的主要目录结构</strong></h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">find</span> / <span class="token parameter variable">-name</span> mysql<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+                <h4 id="1-MySQL8的主要目录结构"><a href="#1-MySQL8的主要目录结构" class="headerlink" title="1. MySQL8的主要目录结构"></a><strong>1. MySQL8的主要目录结构</strong></h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">find</span> / <span class="token parameter variable">-name</span> mysql<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h5 id="1-1-数据库文件的存放路径"><a href="#1-1-数据库文件的存放路径" class="headerlink" title="1.1 数据库文件的存放路径"></a><strong>1.1</strong> <strong>数据库文件的存放路径</strong></h5><pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">show variables like 'datadir'; # /var/lib/mysql/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -593,7 +593,8 @@ test.MYI 存储索引 (MYIndex<span aria-hidden="true" class="line-numbers-rows"
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            第03章 用户与权限管理1. 用户管理1.1 登录MySQL服务器启动MySQL服务后，可以通过mysql命令来登录MySQL服务器，命令如
+                            1. 用户管理1.1 登录MySQL服务器启动MySQL服务后，可以通过mysql命令来登录MySQL服务器，命令如下：
+mysql –h 
                         
                     </div>
                     <div class="publish-info">
@@ -654,8 +655,10 @@ test.MYI 存储索引 (MYIndex<span aria-hidden="true" class="line-numbers-rows"
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            第01章 Linux下MySQL的安装与使用1. 安装前说明1.1 查看是否安装过MySQL
-如果你是用rpm安装, 检查一下RPM PAC
+                            1. 安装前说明1.1 查看是否安装过MySQL
+如果你是用rpm安装, 检查一下RPM PACKAGE：
+
+rpm -qa | grep 
                         
                     </div>
                     <div class="publish-info">

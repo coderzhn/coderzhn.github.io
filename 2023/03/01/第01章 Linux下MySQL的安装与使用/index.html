@@ -5,13 +5,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="第01章 Linux下MySQL的安装与使用, Zhn&amp;Blog">
-    <meta name="description" content="第01章 Linux下MySQL的安装与使用1. 安装前说明1.1 查看是否安装过MySQL
+    <meta name="description" content="1. 安装前说明1.1 查看是否安装过MySQL
 如果你是用rpm安装, 检查一下RPM PACKAGE：
 
 rpm -qa | grep -i mysql # -i 忽略大小写
 
 
-检查mysq">
+检查mysql service：
+
+systemctl ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -364,7 +366,7 @@ rpm -qa | grep -i mysql # -i 忽略大小写
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="第01章-Linux下MySQL的安装与使用"><a href="#第01章-Linux下MySQL的安装与使用" class="headerlink" title="第01章 Linux下MySQL的安装与使用"></a>第01章 Linux下MySQL的安装与使用</h2><h4 id="1-安装前说明"><a href="#1-安装前说明" class="headerlink" title="1. 安装前说明"></a><strong>1.</strong> <strong>安装前说明</strong></h4><h5 id="1-1-查看是否安装过MySQL"><a href="#1-1-查看是否安装过MySQL" class="headerlink" title="1.1 查看是否安装过MySQL"></a><strong>1.1</strong> <strong>查看是否安装过MySQL</strong></h5><ul>
+                <h4 id="1-安装前说明"><a href="#1-安装前说明" class="headerlink" title="1. 安装前说明"></a><strong>1.</strong> <strong>安装前说明</strong></h4><h5 id="1-1-查看是否安装过MySQL"><a href="#1-1-查看是否安装过MySQL" class="headerlink" title="1.1 查看是否安装过MySQL"></a><strong>1.1</strong> <strong>查看是否安装过MySQL</strong></h5><ul>
 <li>如果你是用rpm安装, 检查一下RPM PACKAGE：</li>
 </ul>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">rpm</span> <span class="token parameter variable">-qa</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token parameter variable">-i</span> mysql <span class="token comment"># -i 忽略大小写</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -725,8 +727,7 @@ D <span class="token arrow operator">--&gt;</span> <span class="token label prop
                 <a href="/2023/03/01/%E7%AC%AC02%E7%AB%A0%20MySQL%E7%9A%84%E6%95%B0%E6%8D%AE%E7%9B%AE%E5%BD%95/">
                     <div class="card-image">
                         
-                        
-                        <img src="https://cdn.jsdelivr.net/gh/coderzhn/coderzhn.github.io/medias/featureimages/11.jpg" class="responsive-img" alt="第02章 MySQL的数据目录">
+                        <img src="https://raw.githubusercontent.com/coderzhn/coderzhn.github.io/main/mysql3.png" class="responsive-img" alt="第02章 MySQL的数据目录">
                         
                         <span class="card-title">第02章 MySQL的数据目录</span>
                     </div>
@@ -734,9 +735,9 @@ D <span class="token arrow operator">--&gt;</span> <span class="token label prop
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            第02章 MySQL的数据目录1. MySQL8的主要目录结构find / -name mysql
+                            1. MySQL8的主要目录结构find / -name mysql
 
-1.1 数据库文件的存放路径show 
+1.1 数据库文件的存放路径show variables like 
                         
                     </div>
                     <div class="publish-info">
