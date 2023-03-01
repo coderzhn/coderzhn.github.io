@@ -15,10 +15,6 @@
           
           <category> Mysql </category>
           
-          <category> 学习笔记 </category>
-          
-          <category> 高级篇 </category>
-          
       </categories>
       
       
@@ -27,6 +23,8 @@
             <tag> 尚硅谷学习笔记 </tag>
             
             <tag> Mysql安装与登录 </tag>
+            
+            <tag> Mysql高级篇 </tag>
             
         </tags>
       
