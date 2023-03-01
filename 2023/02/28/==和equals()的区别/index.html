@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="==和equals()的区别, Zhn&amp;Blog">
-    <meta name="description" content="&amp;#x3D;&amp;#x3D;和equals()有什么区别？Object类提供的equals()方法，默认是用&amp;#x3D;&amp;#x3D;来进行比较的，也就是说只有两个对象是同一个对象时，才能返回相等的结果,在实际使用中，一般会重写定义的Class的">
+    <meta name="description" content="==和equals()有什么区别？Object类提供的equals()方法，默认是用==来进行比较的，也就是说只有两个对象是同一个对象时，才能返回相等的结果,在实际使用中，一般会重写定义的Class的equals方法以下是Object中的e">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -400,7 +400,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    541
+                    521
                 </div>
                 
 
@@ -425,27 +425,27 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="x3D-x3D-和equals-有什么区别？"><a href="#x3D-x3D-和equals-有什么区别？" class="headerlink" title="&#x3D;&#x3D;和equals()有什么区别？"></a>&#x3D;&#x3D;和equals()有什么区别？</h1><p><strong>Object类提供的equals()方法，默认是用&#x3D;&#x3D;来进行比较的，也就是说只有两个对象是同一个对象时，才能返回相等的结果,在实际使用中，一般会重写定义的Class的equals方法</strong><br>以下是Object中的equals()方法实现：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">equals</span><span class="token punctuation">(</span><span class="token class-name">Object</span> obj<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <h1 id="x3D-x3D-和equals-有什么区别？"><a href="#x3D-x3D-和equals-有什么区别？" class="headerlink" title="==和equals()有什么区别？"></a>==和equals()有什么区别？</h1><p><strong>Object类提供的equals()方法，默认是用==来进行比较的，也就是说只有两个对象是同一个对象时，才能返回相等的结果,在实际使用中，一般会重写定义的Class的equals方法</strong><br>以下是Object中的equals()方法实现：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">equals</span><span class="token punctuation">(</span><span class="token class-name">Object</span> obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
 <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h2 id="使用-x3D-x3D-进行比较"><a href="#使用-x3D-x3D-进行比较" class="headerlink" title="使用&#x3D;&#x3D;进行比较"></a>使用&#x3D;&#x3D;进行比较</h2><ul>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h2 id="使用-x3D-x3D-进行比较"><a href="#使用-x3D-x3D-进行比较" class="headerlink" title="使用==进行比较"></a>使用==进行比较</h2><ul>
 <li>作用于基本数据类型（byte,short,char,int,long,float,double,boolean）时比较他们之间的值是否相等；</li>
-<li>作用于引用数据类型时，是比较两个对象的内存地址是否相同，既判断它们是否为同一个对象；<br>引用数据类型，比较的是他们在堆内存地址是否相等。每新new一个引用类型的对象，会重新分配堆内存空间，使用&#x3D;&#x3D;比较返回false;</li>
+<li>作用于引用数据类型时，是比较两个对象的内存地址是否相同，既判断它们是否为同一个对象；<br>引用数据类型，比较的是他们在堆内存地址是否相等。每新new一个引用类型的对象，会重新分配堆内存空间，使用==比较返回false;</li>
 </ul>
 <h2 id="使用equals-方法进行比较"><a href="#使用equals-方法进行比较" class="headerlink" title="使用equals()方法进行比较"></a>使用equals()方法进行比较</h2><ul>
-<li>没有重写时，Object默认用&#x3D;&#x3D;实现，既比较两个对象的内存地址是否相同;</li>
-<li>进行重写后，一般会按照对象中的内容来进行比较，若两个对象内容相同则认为对象相同，否则认为对象不等,比如:String类<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">equals</span><span class="token punctuation">(</span><span class="token class-name">Object</span> anObject<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> anObject<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<li>没有重写时，Object默认用==实现，既比较两个对象的内存地址是否相同;</li>
+<li>进行重写后，一般会按照对象中的内容来进行比较，若两个对象内容相同则认为对象相同，否则认为对象不等,比如:String类<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">equals</span><span class="token punctuation">(</span><span class="token class-name">Object</span> anObject<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> anObject<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
+<span class="token punctuation">}</span>
 <span class="token keyword">return</span> <span class="token punctuation">(</span>anObject <span class="token keyword">instanceof</span> <span class="token class-name">String</span> aString<span class="token punctuation">)</span>
     <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token constant">COMPACT_STRINGS</span> <span class="token operator">||</span> <span class="token keyword">this</span><span class="token punctuation">.</span>coder <span class="token operator">==</span> aString<span class="token punctuation">.</span>coder<span class="token punctuation">)</span>
     <span class="token operator">&amp;&amp;</span> <span class="token class-name">StringLatin1</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>value<span class="token punctuation">,</span> aString<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
-<h2 id="例题"><a href="#例题" class="headerlink" title="例题:"></a>例题:</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StringDemo</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题:"></a>例题:</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StringDemo</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token class-name">String</span> a <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"ab"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//a为一个引用</span>
         <span class="token class-name">String</span> b <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"ab"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//b为另一个引用，对象的内容一样</span>
         <span class="token class-name">String</span> aa <span class="token operator">=</span> <span class="token string">"ab"</span><span class="token punctuation">;</span> <span class="token comment">//放在常量池中</span>
@@ -462,8 +462,8 @@
         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"a == aa"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">if</span><span class="token punctuation">(</span>a<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>aa<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">//true</span>
         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"a.equals(aa)"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <blockquote>
 <p>补充:<br>当创建String类型的对象时，虚拟机会在常量池中查找有没有已经存在的值和要创建的值相同的对象，如果有就把它赋给当前引用。如果没有就在常量池中重新创建一个String对象</p>
 </blockquote>
@@ -667,7 +667,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            &#x3D;&#x3D;和equals()有什么区别？Object类提供的equals()方法，默认是用&#x3D;&#x3D;来进行比较的
+                            ==和equals()有什么区别？Object类提供的equals()方法，默认是用==来进行比较的，也就是说只有两个对象是同一个对象时，才
                         
                     </div>
                     <div class="publish-info">
@@ -909,7 +909,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">541</span>
+                        class="white-color">521</span>
             
             
             
