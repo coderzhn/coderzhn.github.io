@@ -973,6 +973,11 @@ article .article-tags .chip {
     right: 10px;
 }
 
+.reprint__type{
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+ }
 .paging {
     margin-bottom: 15px;
 }
