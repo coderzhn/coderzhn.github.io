@@ -632,9 +632,7 @@ header .go-back i {
 }
 
 /* 添加背景像素纹*/
-.bg-cover::before {
-    background-image: url('https://raw.githubusercontent.com/coderzhn/blogimags/main/blogimages/Untitled.png');
-}
+.bg-cover:before,
 .bg-cover:after {
     position: absolute;
     z-index: 1;
@@ -644,6 +642,7 @@ header .go-back i {
     left: 0;
     top: 0;
     content: "";
+    background-image: url('https://raw.githubusercontent.com/coderzhn/blogimags/main/blogimages/Untitled.png');
 }
 
 .bg-cover .container {
