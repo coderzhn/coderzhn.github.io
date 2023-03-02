@@ -29,7 +29,7 @@ body.DarkMode header .side-nav .mobile-head .logo-desc,
 body.DarkMode header .side-nav .menu-list a,
 body.DarkMode .bg-cover .post-title,
 body.DarkMode.read .bg-cover .description {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(217, 195, 195, 0.6);
 }
 
 /* 背景颜色变灰色 */
@@ -619,7 +619,7 @@ header .go-back i {
 }
 
 .index-cover {
-    height: 100vh;
+    height: 110vh;
 }
 
 .post-cover {
@@ -631,7 +631,11 @@ header .go-back i {
     animation: rainbow 60s infinite;
 }
 
-.bg-cover:before,
+/* 添加背景像素纹*/
+.bg-cover::before {
+    background-image: url('https://raw.githubusercontent.com/coderzhn/blogimags/main/blogimages/Untitled.png');
+}
+
 .bg-cover:after {
     position: absolute;
     z-index: 1;
@@ -669,7 +673,7 @@ header .go-back i {
     font-weight: 400;
 }
 
-@-webkit-keyframes rainbow {
+/* @-webkit-keyframes rainbow {
 
     0%,
     100% {
@@ -759,7 +763,7 @@ header .go-back i {
         background: -moz-linear-gradient(135deg, rgba(233, 30, 99, 0.75) 0%, rgba(233, 30, 99, 0.65) 100%);
         background: -webkit-linear-gradient(135deg, rgba(2233, 30, 99, 0.75) 0%, rgba(233, 30, 99, 0.65) 100%);
     }
-}
+} */
 
 .index-card {
     margin-top: -10px;
