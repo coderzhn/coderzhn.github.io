@@ -308,7 +308,7 @@ mark {
 .card .card-image img {
     border-radius: 8px 8px 0 0;
     /* 修改文章列表图片填充样式为 cover 以覆盖整个区域而不会被缩放 */
-    object-fit: cover;
+    object-fit: fill;
 }
 
 .container .row {
@@ -631,8 +631,7 @@ header .go-back i {
     animation: rainbow 60s infinite;
 }
 
-/* 添加背景像素纹*/ */
- /* .bg-cover:before,
+.bg-cover:before,
 .bg-cover:after {
     position: absolute;
     z-index: 1;
@@ -642,8 +641,7 @@ header .go-back i {
     left: 0;
     top: 0;
     content: "";
-    background-image: url('https://raw.githubusercontent.com/coderzhn/blogimags/main/blogimages/Untitled.png');
-} */
+} 
 
 .bg-cover .container {
     position: relative;
@@ -764,7 +762,7 @@ header .go-back i {
 } */
 
 .index-card {
-    margin-top: -10px;
+    margin-top: -410px;
     padding-top: 20px;
 }
 

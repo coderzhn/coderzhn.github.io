@@ -300,7 +300,7 @@ body.DarkMode #fMessageBoard, body.DarkMode .fArticleMessage, body.DarkMode #fci
 }
 /*about页面细节*/
 body.DarkMode .profile .author .title {
-    color: #faebd7;
+    color: #0b0711;
 }
 body.DarkMode .my-projects .info .info-title a {
     color: tomato;
@@ -334,7 +334,7 @@ body.DarkMode #waline textarea {
     background-color: rgba(255, 255, 255, 0);
     resize: vertical;
     caret-color: red;
-    color: #b8abab;
+    color: #060f47;
     white-space: pre-line
 }
 /* 黑夜模式动画 */
