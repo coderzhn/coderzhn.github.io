@@ -619,19 +619,19 @@ header .go-back i {
 }
 
 .index-cover {
-    height: 110vh;
+    height: 100vh;
 }
 
 .post-cover {
-    height: 40vh !important;
+    height: 50vh !important;
 }
 
-/* .bg-cover:after {
+.bg-cover:after {
     -webkit-animation: rainbow 60s infinite;
     animation: rainbow 60s infinite;
-} */
+}
 
-.bg-cover:before,
+/* .bg-cover:before,
 .bg-cover:after {
     position: absolute;
     z-index: 1;
@@ -641,7 +641,7 @@ header .go-back i {
     left: 0;
     top: 0;
     content: "";
-} 
+}  */
 
 .bg-cover .container {
     position: relative;
