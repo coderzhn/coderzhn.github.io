@@ -26,12 +26,12 @@
 
 #gitalk-container .gt-container .gt-btn-preview {
     color: #4caf50;
-    background-color: #fff !important;
+    background-color: #c0bbbb !important;
     box-shadow: 0 2px 2px 0 rgba(76, 175, 80, 0.14), 0 3px 1px -2px rgba(76, 175, 80, 0.2), 0 1px 5px 0 rgba(76, 175, 80, 0.12);
 }
 
 #gitalk-container .gt-container .gt-header-textarea {
-    background-color: #f6f9fc;
+    background-color: #bdc3ca;
     border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
@@ -55,7 +55,7 @@
 
 #gitalk-container .gt-container .gt-header-preview {
     border: 1px solid rgba(0, 0, 0, 0.02);
-    background-color: #f9f9f9;
+    background-color: #c8c7c7;
 }
 
 .markdown-body p {
@@ -109,7 +109,7 @@ ol li {
 
 .markdown-body table, th, td {
     padding: 12px 13px;
-    border: 1px solid #dfe2e5;
+    border: 1px solid #c7cacd;
 }
 
 .markdown-body table, th, td {
@@ -117,7 +117,7 @@ ol li {
 }
 
 table tr:nth-child(2n), thead {
-    background-color: #fafafa;
+    background-color: #c6c6c6;
 }
 
 .markdown-body table th {
@@ -172,7 +172,7 @@ table tr:nth-child(2n), thead {
 .markdown-body hr {
     margin: 12px 0;
     border: 0;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #bdb9b9;
 }
 
 .markdown-body blockquote {
@@ -202,7 +202,7 @@ table tr:nth-child(2n), thead {
 
 .markdown-body pre code {
     padding: 0;
-    color: #e8eaf6;
+    color: #c1c4d3;
     background-color: #272822;
 }
 
@@ -213,7 +213,7 @@ table tr:nth-child(2n), thead {
 
 .markdown-body code[class*="language-"],
 pre[class*="language-"] {
-    color: #e8eaf6;
+    color: #d0d1da;
 }
 
 .markdown-body [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
@@ -244,6 +244,6 @@ strong {
 }
 
 .markdown-body mark {
-    background-color: #fcf8e3;
+    background-color: #d6d2ba;
     padding: .2em;
 }
