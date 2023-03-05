@@ -631,7 +631,7 @@ header .go-back i {
     animation: rainbow 60s infinite;
 }
 
-/* .bg-cover:before,
+.bg-cover:before,
 .bg-cover:after {
     position: absolute;
     z-index: 1;
@@ -640,8 +640,8 @@ header .go-back i {
     display: block;
     left: 0;
     top: 0;
-    content: "";
-}  */
+    /* content: ""; */
+} 
 
 .bg-cover .container {
     position: relative;
