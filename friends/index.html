@@ -306,11 +306,9 @@
 </div>
 
 
-    <script>
-        // 每天切换 banner 图.  Switch banner image every day.
-        var bannerUrl = "/medias/banner/" + new Date().getHours()+ '.jpg';
-        $('.bg-cover').css('background-image', 'url(/medias/featureimages/21.jpg)');
-    </script>
+        <script>
+            $('.bg-cover').css('background-image', 'url(https://gitee.com/cungudafa/source/raw/master/img/bg/hyo/1.png)');
+        </script>
     
     </div>
 </div>
@@ -870,7 +868,7 @@ gitment.render('gitment-content');
 </div>
 
 <script src="/libs/valine/av-min.js"></script>
-<script src="/libs/valine/Valine.min.js"></script>
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
 <script>
     new Valine({
         el: '#vcomments',
