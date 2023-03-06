@@ -345,103 +345,6 @@
             </div>
             <!--valine评论弹幕-->
             
-                <p>
-                    <b>畅所欲言</b><br>
-                    <b>在这里可以留下你的足迹，欢迎在下方留言，欢迎交换友链</b><br>
-                    <b>友链信息</b><br>
-                    <b>博客名称: Zhn&Blog</b><br>
-                    <b>博客网址: https://coderzhn.github.io</b><br>
-                    <b>博客头像: https://coderzhn.github.io/medias/logo.png</b><br>
-                    <b>博客介绍: 上了生活的贼船,就当个快乐海盗</b><br>
-                </p>
-                <div class="container">
-                    <section id="custom" class="bb-section">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <form class="form-inline">
-                                    <div class="form-group">
-                                        文字：<input class="form-control" name="info" type="text" placeholder="留下你的足迹"/>
-                                    </div>
-                                    <div class="form-group">
-                                        链接：<input class="form-control" name="href" type="text" placeholder="https://github.com/coderzhn/coderzhn.github.io/"/>
-                                    </div>
-                                    <div class="form-group">
-                                        速度：<input  class="form-control"  name="speed" type="text" placeholder="5~20" value="16" />
-                                    </div>
-                                </form>
-                                <div class="form-group">
-                                    <button id="send"  class="btn" onclick="run()">留言</button>
-                                    <button id="clear" class="btn " onclick="clear_barrage()"> 清除</button>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-
-                <script type="text/javascript">
-                    AV.init({
-                        appId: 'NNuPzpGU723arfSIiJHSXmyg-gzGzoHsz',
-                        appKey: 'rhoulubGPbmwpXI8ec4924kc'
-                    });
-
-                    $(function() {
-                        do_barrager();
-                        async function do_barrager() {
-                            let lists = [];
-                            //查询弹幕
-                            const query = new AV.Query('barrager');
-                            const barrager = await query.find().then((barrager) => {
-                                lists = barrager;
-                            })
-                            let length = lists.length;
-                            let index = 0;
-                            const timer = setInterval(() => {
-                                if (index === length) {
-                                    clearInterval(timer);
-                                    do_barrager()
-                                } else {
-                                    let obj = lists[index]
-                                    let jsonObject = eval('(' + JSON.stringify(obj) + ')');
-                                    $('body').barrager({
-                                        'img': '/medias/barrager/' + Math.floor(Math.random() * 3) + ".png",
-                                        'href': jsonObject.href,
-                                        'info': jsonObject.info,
-                                        'speed': jsonObject.speed
-                                    });
-                                    index++;
-                                }
-                            }, 500)
-                        }
-                    });
-
-                    //发送弹幕
-                    function  run(){
-                        let info = $('input[name=info]').val();
-                        (info === '' ) ?  info='快留下你的足迹' : info=info;
-                        let href = $('input[name=href]').val();
-                        (href === '' ) ?  href='https://github.com/coderzhn/coderzhn.github.io/' : href=href;
-                        let speed = parseInt($('input[name=speed]').val());
-                        if(speed > 20 || speed < 5)
-                            speed = Math.floor(Math.random() * 10) + 5;
-                        const Barrager = AV.Object.extend('barrager');
-                        const barrager = new Barrager();
-                        barrager.set('href', href);
-                        barrager.set('info', info);
-                        barrager.set('speed', speed);
-                        barrager.save().then((todo) => {
-                            $(" input[ name='info' ] ").val("")
-                            $(" input[ name='href' ] ").val("")
-                            $(" input[ name='speed' ] ").val("")
-                        });
-                    }
-
-                    function  clear_barrage()
-                    {
-                        $.fn.barrager.removeAll();
-                    }
-
-                </script>
-            
         </div>
 
         <!--其他评论card-->
@@ -458,6 +361,59 @@
             
 
             
+
+            
+                
+    <div id="SOHUCS"></div>
+    <script type="text/javascript">
+        window.onload = function () {
+            var loadChangYan = function () {
+                var appid = 'cywyQFBWD';
+                var conf = '8b5f1ad67589ce8fac5eb55e4cd5c82e';
+                var width = window.innerWidth || document.documentElement.clientWidth;
+                if (width < 960) {
+                    var head = document.getElementsByTagName('head')[0] || document.head || document.documentElement;
+                    var script = document.createElement('script');
+                    script.type = 'text/javascript';
+                    script.charset = 'utf-8';
+                    script.id = 'changyan_mobile_js';
+                    script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid +
+                        '&conf=' + conf;
+                    head.appendChild(script);
+                } else {
+                    var loadJs = function (d, a) {
+                        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+                        var b = document.createElement("script");
+                        b.setAttribute("type", "text/javascript");
+                        b.setAttribute("charset", "UTF-8");
+                        b.setAttribute("src", d);
+                        if (typeof a === "function") {
+                            if (window.attachEvent) {
+                                b.onreadystatechange = function () {
+                                    var e = b.readyState;
+                                    if (e === "loaded" || e === "complete") {
+                                        b.onreadystatechange = null;
+                                        a()
+                                    }
+                                }
+                            } else {
+                                b.onload = a
+                            }
+                        }
+                        c.appendChild(b)
+                    };
+                    loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js", function () {
+                        window.changyan.api.config({
+                            appid: appid,
+                            conf: conf
+                        })
+                    });
+                }
+            }
+
+            loadChangYan();
+        }
+    </script>
 
             
 
@@ -707,10 +663,6 @@ $(function () {
     <!-- 鼠标星星特效 -->
     
 
-     
-        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
-        <script src="/libs/others/TencentCaptcha.js"></script>
-        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
     
 
     <!-- Baidu Analytics -->
