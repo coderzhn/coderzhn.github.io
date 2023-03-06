@@ -352,7 +352,7 @@
                     <b>博客名称: Zhn&Blog</b><br>
                     <b>博客网址: https://coderzhn.github.io</b><br>
                     <b>博客头像: https://coderzhn.github.io/medias/logo.png</b><br>
-                    <b>博客介绍: 犹豫就会败北</b><br>
+                    <b>博客介绍: 上了生活的贼船,就当个快乐海盗</b><br>
                 </p>
                 <div class="container">
                     <section id="custom" class="bb-section">
@@ -360,10 +360,10 @@
                             <div class="col-md-5">
                                 <form class="form-inline">
                                     <div class="form-group">
-                                        文字：<input class="form-control" name="info" type="text" placeholder="hello, world"/>
+                                        文字：<input class="form-control" name="info" type="text" placeholder="留下你的足迹"/>
                                     </div>
                                     <div class="form-group">
-                                        链接：<input class="form-control" name="href" type="text" placeholder="https://github.com/blinkfox/hexo-theme-matery"/>
+                                        链接：<input class="form-control" name="href" type="text" placeholder="https://github.com/coderzhn/coderzhn.github.io/"/>
                                     </div>
                                     <div class="form-group">
                                         速度：<input  class="form-control"  name="speed" type="text" placeholder="5~20" value="16" />
@@ -417,9 +417,9 @@
                     //发送弹幕
                     function  run(){
                         let info = $('input[name=info]').val();
-                        (info === '' ) ?  info='hello world' : info=info;
+                        (info === '' ) ?  info='快留下你的足迹' : info=info;
                         let href = $('input[name=href]').val();
-                        (href === '' ) ?  href='https://github.com/blinkfox/hexo-theme-matery' : href=href;
+                        (href === '' ) ?  href='https://github.com/coderzhn/coderzhn.github.io/' : href=href;
                         let speed = parseInt($('input[name=speed]').val());
                         if(speed > 20 || speed < 5)
                             speed = Math.floor(Math.random() * 10) + 5;
@@ -447,33 +447,6 @@
         <!--其他评论card-->
         <div class="card">
             
-
-            
-                <link rel="stylesheet" href="/libs/gitment/gitment-default.css">
-<link rel="stylesheet" href="/css/gitment.css">
-
-<div class="gitment-card card" data-aos="fade-up">
-    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
-        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
-        <span>评论</span>
-    </div>
-    <div id="gitment-content" class="card-content"></div>
-</div>
-
-<script src="/libs/gitment/gitment.js"></script>
-<script>
-var gitment = new Gitment({
-    id: 'Sun Feb 26 2023 23:43:57 GMT+0800',
-    owner: 'coderzhn.github.io',
-    repo: '',
-    oauth: {
-        client_id: 'e8fef71498e0b8d0e5e4',
-        client_secret: 'bde8f05fec68a8315a93f1893def4c9d482b8552'
-    }
-});
-
-gitment.render('gitment-content');
-</script>
 
             
 
