@@ -22,7 +22,7 @@
             
             <tag> 注解 </tag>
             
-            <tag> RequestMapping </tag>
+            <tag> ＠RequestMapping </tag>
             
         </tags>
       
