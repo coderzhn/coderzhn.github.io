@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Spring如何解决循环依赖问题</title>
+      <link href="/2023/09/24/Spring%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+      <url>/2023/09/24/Spring%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p><img src="https://blog-images-1317062290.cos.ap-chengdu.myqcloud.com/img/20230924164803.png"></p><p>AOP问题，提前AOP解决</p><ul><li>二级缓存 earlySingletonObjects<br>保证不完整的Bean是单例的<br>解决循环依赖问题<br>但无法解决AOP循环依赖问题</li><li>三级缓存 singletonFactories<br>在Bean初始化一开始的时候就将lambda表达式存入三级缓存<br>保存lamada表达式，可以根据lamada表达式判断，bean是否进行AOP<br>如果进行AOP则将代理对象放入二级缓存<br>如果没有进行AOP则将依赖注入过的普通对象放入二级缓存<br>让解决循环依赖的问题变得更加方便</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Spring </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Bean </tag>
+            
+            <tag> 依赖注入 </tag>
+            
+            <tag> 循环依赖 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Spring中Bean的生命周期</title>
       <link href="/2023/09/24/Spring%E4%B8%ADBean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
       <url>/2023/09/24/Spring%E4%B8%ADBean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</url>
