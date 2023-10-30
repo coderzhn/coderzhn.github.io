@@ -1,0 +1,448 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>拦截器、过滤器、AOP的区别和联系 | Zhn&amp;Blog</title><meta name="author" content="coderzhn"><meta name="copyright" content="coderzhn"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、什么是过滤器（Filter）过滤器，顾名思义就是起到过滤筛选作用的一种事物，只不过相较于现实生活中的过滤器，这里的过滤器过滤的对象是客户端访问的web资源， 也可以理解为一种预处理手段，对资源进行拦截后，将其中我们认为的杂质（用户自己定义的）过滤，符合条件的放行，不符合的则拦截下来 1.1、过滤器常见的使用场景 统一设置编码 过滤敏感字符 登录校验 URL级别的访问权限控制 数据压缩  1.2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="拦截器、过滤器、AOP的区别和联系">
+<meta property="og:url" content="https://coderzhn.github.io/2023/10/30/%E6%8B%A6%E6%88%AA%E5%99%A8%E3%80%81%E8%BF%87%E6%BB%A4%E5%99%A8%E3%80%81AOP%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB/index.html">
+<meta property="og:site_name" content="Zhn&amp;Blog">
+<meta property="og:description" content="一、什么是过滤器（Filter）过滤器，顾名思义就是起到过滤筛选作用的一种事物，只不过相较于现实生活中的过滤器，这里的过滤器过滤的对象是客户端访问的web资源， 也可以理解为一种预处理手段，对资源进行拦截后，将其中我们认为的杂质（用户自己定义的）过滤，符合条件的放行，不符合的则拦截下来 1.1、过滤器常见的使用场景 统一设置编码 过滤敏感字符 登录校验 URL级别的访问权限控制 数据压缩  1.2">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog-images-1317062290.cos.ap-chengdu.myqcloud.com/img/20231030143518.png">
+<meta property="article:published_time" content="2023-10-30T06:33:15.343Z">
+<meta property="article:modified_time" content="2023-10-30T06:47:16.604Z">
+<meta property="article:author" content="coderzhn">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="拦截器">
+<meta property="article:tag" content="过滤器">
+<meta property="article:tag" content="AOP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog-images-1317062290.cos.ap-chengdu.myqcloud.com/img/20231030143518.png"><link rel="shortcut icon" href="/img/favico.png"><link rel="canonical" href="https://coderzhn.github.io/2023/10/30/%E6%8B%A6%E6%88%AA%E5%99%A8%E3%80%81%E8%BF%87%E6%BB%A4%E5%99%A8%E3%80%81AOP%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdnjs.sourcegcdn.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '拦截器、过滤器、AOP的区别和联系',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-30 14:47:16'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/poem/poem.css"> <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/mainColor/heoMainColor.css"><meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js/themes/blue/pace-theme-minimal.min.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://blog-images-1317062290.cos.ap-chengdu.myqcloud.com/img/author.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">41</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">75</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url('https://blog-images-1317062290.cos.ap-chengdu.myqcloud.com/img/20231030143518.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Zhn&amp;Blog"><img class="site-icon" src="/img/favico.png"/><span class="site-name">Zhn&amp;Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">拦截器、过滤器、AOP的区别和联系</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-30T06:33:15.343Z" title="发表于 2023-10-30 14:33:15">2023-10-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-30T06:47:16.604Z" title="更新于 2023-10-30 14:47:16">2023-10-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%88%87%E9%9D%A2%E7%9B%B8%E5%85%B3/">切面相关</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="拦截器、过滤器、AOP的区别和联系"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2023/10/30/%E6%8B%A6%E6%88%AA%E5%99%A8%E3%80%81%E8%BF%87%E6%BB%A4%E5%99%A8%E3%80%81AOP%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB/#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="一、什么是过滤器（Filter）"><a href="#一、什么是过滤器（Filter）" class="headerlink" title="一、什么是过滤器（Filter）"></a>一、什么是过滤器（Filter）</h1><p>过滤器，顾名思义就是起到过滤筛选作用的一种事物，只不过相较于现实生活中的过滤器，这里的过滤器过滤的对象是客户端访问的web资源，</p>
+<p>也可以理解为一种预处理手段，对资源进行拦截后，将其中我们认为的杂质（用户自己定义的）过滤，符合条件的放行，不符合的则拦截下来<br><img src="https://blog-images-1317062290.cos.ap-chengdu.myqcloud.com/img/20231030143629.png"></p>
+<h2 id="1-1、过滤器常见的使用场景"><a href="#1-1、过滤器常见的使用场景" class="headerlink" title="1.1、过滤器常见的使用场景"></a>1.1、过滤器常见的使用场景</h2><ul>
+<li>统一设置编码</li>
+<li>过滤敏感字符</li>
+<li>登录校验</li>
+<li>URL级别的访问权限控制</li>
+<li>数据压缩</li>
+</ul>
+<h2 id="1-2、Springboot-整合过滤器"><a href="#1-2、Springboot-整合过滤器" class="headerlink" title="1.2、Springboot 整合过滤器"></a>1.2、Springboot 整合过滤器</h2><p><strong>编写Filter</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HeFilter</span> <span class="token keyword">implements</span> <span class="token class-name">Filter</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token class-name">FilterConfig</span> filterConfig<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">ServletException</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">doFilter</span><span class="token punctuation">(</span><span class="token class-name">ServletRequest</span> request<span class="token punctuation">,</span> <span class="token class-name">ServletResponse</span> response<span class="token punctuation">,</span> <span class="token class-name">FilterChain</span> chain<span class="token punctuation">)</span><span class="token keyword">throws</span> <span class="token class-name">IOException</span><span class="token punctuation">,</span> <span class="token class-name">ServletException</span> <span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"您已进入filter过滤器，您的请求正常，请继续遵规则..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        chain<span class="token punctuation">.</span><span class="token function">doFilter</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> response<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">destroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>编写Filter配置类</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Configuration</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ServletConfig</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">FilterRegistrationBean</span> <span class="token function">heFilterRegistration</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">FilterRegistrationBean</span> registration <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FilterRegistrationBean</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">HeFilter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        registration<span class="token punctuation">.</span><span class="token function">addUrlPatterns</span><span class="token punctuation">(</span><span class="token string">"/*"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> registration<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>注解方式</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Slf4j</span>
+<span class="token annotation punctuation">@Component</span>
+<span class="token comment">// filterName就是当前类名称，还有一个urlPattens的参数，这个参数表示要过滤的URL上的后缀名，是多参数，可以用数组表示。</span>
+<span class="token annotation punctuation">@WebFilter</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"/hello"</span><span class="token punctuation">)</span> 或 <span class="token punctuation">(</span>filterName <span class="token operator">=</span> <span class="token string">"f1"</span><span class="token punctuation">,</span> urlPatterns <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"*.html"</span><span class="token punctuation">,</span><span class="token string">"*.jsp"</span><span class="token punctuation">,</span><span class="token string">"/hello"</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HelloFilter2</span> <span class="token keyword">implements</span> <span class="token class-name">Filter</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token class-name">FilterConfig</span> filterConfig<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">ServletException</span> <span class="token punctuation">{</span>
+
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">doFilter</span><span class="token punctuation">(</span><span class="token class-name">ServletRequest</span> servletRequest<span class="token punctuation">,</span> <span class="token class-name">ServletResponse</span> servletResponse<span class="token punctuation">,</span>
+                         <span class="token class-name">FilterChain</span> filterChain<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span><span class="token punctuation">,</span> <span class="token class-name">ServletException</span> <span class="token punctuation">{</span>
+        log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"进入到过滤器2啦"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 这里可以进行一些条件判断（假如要做登录验证的话）</span>
+        filterChain<span class="token punctuation">.</span><span class="token function">doFilter</span><span class="token punctuation">(</span>servletRequest<span class="token punctuation">,</span>servletResponse<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">destroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>在主启动类上加@ServletComponentScan(“com.pandy.blog.filters”)   指明filter所在位置的包。 若有多个filter，默认根据filter类名的字母倒叙排列，且@WebFilter注解方式的过滤器优先级高于Bean注入方式配置的过滤器</p>
+</blockquote>
+<h2 id="1-3、过滤器（Filter）详解"><a href="#1-3、过滤器（Filter）详解" class="headerlink" title="1.3、过滤器（Filter）详解"></a>1.3、过滤器（Filter）详解</h2><ul>
+<li>a) Filter是依赖于Servlet的，需要有Servlet的依赖。</li>
+<li>b) init() 在容器初始化时执行，只执行一次。</li>
+<li>c) doFilter() 目标请求之前拦截执行，拦截之后需要放行才开始执行目标方法。filterChain.doFilter(servletRequest,servletResponse);</li>
+<li>d) destroy() 在容器销毁时执行，只执行一次。</li>
+<li>e) Filter可以拦截所有请求。包括静态资源[css，js…]。</li>
+<li>f) 基于函数回调实现。</li>
+<li>g) 过滤器只能在容器初始化时被调用一次。</li>
+</ul>
+<h1 id="二、什么是拦截器（Interceptor）"><a href="#二、什么是拦截器（Interceptor）" class="headerlink" title="二、什么是拦截器（Interceptor）"></a>二、什么是拦截器（Interceptor）</h1><p>拦截器是springmvc提供的，类似于过滤器。主要用于拦截用户请求并作相应的处理。<br><img src="https://blog-images-1317062290.cos.ap-chengdu.myqcloud.com/img/20231030144114.png"></p>
+<h2 id="2-1、拦截器的使用场景"><a href="#2-1、拦截器的使用场景" class="headerlink" title="2.1、拦截器的使用场景"></a>2.1、拦截器的使用场景</h2><ul>
+<li><p>a) 日志记录</p>
+</li>
+<li><p>b) 权限校验</p>
+</li>
+<li><p>c) 登录校验</p>
+</li>
+<li><p>d) 性能检测[检测方法的执行时间]</p>
+</li>
+</ul>
+<p>其实拦截器和过滤器很像，有些使用场景。无论选用谁都能实现。需要注意的使他们彼此的使用范围，触发机制</p>
+<h2 id="2-2、springboot整合拦截器"><a href="#2-2、springboot整合拦截器" class="headerlink" title="2.2、springboot整合拦截器"></a>2.2、springboot整合拦截器</h2><p>编写自定义拦截器类实现HandlerInterceptor接口或继承其子类【推荐实现的方式，实现可以自动生成preHandle..】</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Component</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">InterceptorDemo</span> <span class="token keyword">implements</span> <span class="token class-name">HandlerInterceptor</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">preHandle</span><span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">,</span> <span class="token class-name">HttpServletResponse</span> response<span class="token punctuation">,</span> <span class="token class-name">Object</span> handler<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"拦截器preHandle在控制器方法执行前执行"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//true：表示放行</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">postHandle</span><span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">,</span> <span class="token class-name">HttpServletResponse</span> response<span class="token punctuation">,</span> <span class="token class-name">Object</span> handler<span class="token punctuation">,</span> <span class="token class-name">ModelAndView</span> modelAndView<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"拦截器postHandle在控制器方法执行后执行"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">afterCompletion</span><span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">,</span> <span class="token class-name">HttpServletResponse</span> response<span class="token punctuation">,</span> <span class="token class-name">Object</span> handler<span class="token punctuation">,</span> <span class="token class-name">Exception</span> ex<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"拦截器afterCompletion在请求完成后执行"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>基于springmvc编写配置类</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Configuration</span>
+<span class="token comment">// 老版本呢是继承WebMvcConfigurerAdapter不过新版本已经放弃了，推荐用下面的方式。</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">InterceptorConfig</span> <span class="token keyword">implements</span> <span class="token class-name">WebMvcConfigurer</span> <span class="token punctuation">{</span> 
+
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token keyword">private</span> <span class="token class-name">InterceptorDemo</span> interceptorDemo<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">addInterceptors</span><span class="token punctuation">(</span><span class="token class-name">InterceptorRegistry</span> registry<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// ** 表示所有拦截路径</span>
+        registry<span class="token punctuation">.</span><span class="token function">addInterceptor</span><span class="token punctuation">(</span>interceptorDemo<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addPathPatterns</span><span class="token punctuation">(</span><span class="token string">"/**"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 或下面这种写法  【若编写自定义拦截器类没有加@Component注解】</span>
+        registry<span class="token punctuation">.</span><span class="token function">addInterceptor</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">InterceptorDemo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addPathPatterns</span><span class="token punctuation">(</span><span class="token string">"/**"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="2-3、拦截器详情"><a href="#2-3、拦截器详情" class="headerlink" title="2.3、拦截器详情"></a>2.3、拦截器详情</h2><ul>
+<li>a) 拦截器是依赖于SpringMVC的，需要有mvc的依赖。</li>
+<li>b) preHandle() 在目标请求完成之前执行。有返回值Boolean类型，true：表示放行</li>
+<li>c) postHandle() 在目标请求之完成后执行。</li>
+<li>d) afterCompletion() 在整个请求完成之后【modelAndView已被渲染执行】。</li>
+<li>e) 拦截器只能拦截==action==请求。不包括静态资源==[css，js…]==。</li>
+<li>f) 基于java==反射机制==实现。</li>
+<li>g) 在拦截器的生命周期中，可以==多次==被调用。<pre class="line-numbers language-java" data-language="java"><code class="language-java">关于拦截器的<span class="token function">preHandle</span><span class="token punctuation">(</span><span class="token punctuation">)</span>方法的参数说明：
+      <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">preHandle</span><span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">,</span> <span class="token class-name">HttpServletResponse</span> response<span class="token punctuation">,</span> <span class="token class-name">Object</span> handler<span class="token punctuation">)</span><span class="token punctuation">{</span>
+      
+      <span class="token punctuation">}</span>
+
+      <span class="token annotation punctuation">@param</span> request        current <span class="token constant">HTTP</span> request
+      <span class="token annotation punctuation">@param</span> response       current <span class="token constant">HTTP</span> response
+      <span class="token annotation punctuation">@param</span> handler        chosen handler <span class="token keyword">to</span> <span class="token namespace">execute</span><span class="token punctuation">,</span> <span class="token keyword">for</span> type and<span class="token operator">/</span>or instance evaluation   <span class="token comment">//选择要执行的处理程序，用于类型和/或实例计算</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h1 id="三、拦截器与过滤器的区别"><a href="#三、拦截器与过滤器的区别" class="headerlink" title="三、拦截器与过滤器的区别"></a>三、拦截器与过滤器的区别</h1><p><img src="https://blog-images-1317062290.cos.ap-chengdu.myqcloud.com/img/20231030144427.png"></p>
+<ol>
+<li>过滤器和拦截器触发时机不一样，过滤器是在请求进入容器后，但请求进入servlet之前进行预处理的。请求结束返回也是，是在servlet处理完后，返回给<br>前端之前。</li>
+<li>拦截器可以获取IOC容器中的各个bean，而过滤器就不行，因为拦截器是spring提供并管理的，spring的功能可以被拦截器使用，在拦截器里注入一个<br>service，可以调用业务逻辑。而过滤器是JavaEE标准，只需依赖servlet api ，不需要依赖spring。</li>
+<li>过滤器的实现基于回调函数。而拦截器（代理模式）的实现基于反射</li>
+<li>Filter是依赖于Servlet容器，属于Servlet规范的一部分，而拦截器则是独立存在的，可以在任何情况下使用。</li>
+<li>Filter的执行由Servlet容器回调完成，而拦截器通常通过动态代理（反射）的方式来执行。</li>
+<li>Filter的生命周期由Servlet容器管理，而拦截器则可以通过IoC容器来管理，因此可以通过注入等方式来获取其他Bean的实例，因此使用会更方便。</li>
+</ol>
+<p><strong>【重点】过滤器和拦截器非常相似，但是它们有很大的区别:</strong></p>
+<blockquote>
+<p>最简单明了的区别就是==过滤器可以修改request，而拦截器不能==<br>过滤器需要在servlet容器中实现，拦截器可以适用于javaEE，javaSE等各种环境<br>拦截器可以==调用IOC容器中的各种依赖，而过滤器不能==<br>==过滤器只能在请求的前后使用，而拦截器可以详细到每个方法==<br>==当有过滤器和拦截器时的执行流程：==</p>
+</blockquote>
+<p><img src="https://blog-images-1317062290.cos.ap-chengdu.myqcloud.com/img/20231030144626.png"></p>
+<h1 id="四、AOP与过滤器、拦截器的区别"><a href="#四、AOP与过滤器、拦截器的区别" class="headerlink" title="四、AOP与过滤器、拦截器的区别"></a>四、AOP与过滤器、拦截器的区别</h1><blockquote>
+<p>过滤器，拦截器拦截的是URL。AOP拦截的是类的元数据(包、类、方法名、参数等)。<br>过滤器并没有定义业务用于执行逻辑前、后等，仅仅是请求到达就执行。<br>拦截器有三个方法，相对于过滤器更加细致，有被拦截逻辑执行前、后等。 AOP针对具体的代码，能够实现更加复杂的业务逻辑。<br>三者功能类似，但各有优势，从过滤器–》拦截器–》切面，拦截规则越来越细致。 执行顺序依次是过滤器、拦截器、切面。</p>
+</blockquote>
+<p>==三者的使用场景==<br>在编写相对比较公用的代码时，优先考虑过滤器，然后是拦截器，最后是aop。<br>比如：<br>权限校验，一般情况下，所有的请求都需要做登陆校验，此时就应该使用过滤器在最顶层做校验；<br>日志记录，一般日志只会针对部分逻辑做日志记录，而且牵扯到业务逻辑完成前后的日志记录，因此使用过滤器不能细致地划分模块，此时应该考虑拦截器，<br>然而拦截器也是依据URL做规则匹配，因此相对来说不够细致，因此我们会考虑到使用AOP实现，AOP可以针对代码的方法级别做拦截，很适合日志功能。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://coderzhn.github.io">coderzhn</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://coderzhn.github.io/2023/10/30/%E6%8B%A6%E6%88%AA%E5%99%A8%E3%80%81%E8%BF%87%E6%BB%A4%E5%99%A8%E3%80%81AOP%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB/">https://coderzhn.github.io/2023/10/30/%E6%8B%A6%E6%88%AA%E5%99%A8%E3%80%81%E8%BF%87%E6%BB%A4%E5%99%A8%E3%80%81AOP%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://coderzhn.github.io" target="_blank">Zhn&Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a><a class="post-meta__tags" href="/tags/%E6%8B%A6%E6%88%AA%E5%99%A8/">拦截器</a><a class="post-meta__tags" href="/tags/%E8%BF%87%E6%BB%A4%E5%99%A8/">过滤器</a><a class="post-meta__tags" href="/tags/AOP/">AOP</a></div><div class="post_share"><div class="social-share" data-image="https://blog-images-1317062290.cos.ap-chengdu.myqcloud.com/img/20231030143518.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/10/30/%E7%81%AB%E8%BD%A6%E8%B4%AD%E7%A5%A8%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E5%A4%8D%E7%9B%98/" title="火车购票系统项目复盘"><img class="cover" src="https://blog-images-1317062290.cos.ap-chengdu.myqcloud.com/img/20231030111727.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">火车购票系统项目复盘</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/02/28/==%E5%92%8Cequals()%E7%9A%84%E5%8C%BA%E5%88%AB/" title="&#x3D;&#x3D;和equals()的区别"><img class="cover" src="https://blog-images-1317062290.cos.ap-chengdu.myqcloud.com/img/OIP-C.KCODaAks1ymwPdhf-DUmMAHaEK" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-28</div><div class="title">&#x3D;&#x3D;和equals()的区别</div></div></a></div><div><a href="/2023/03/16/Spring%20Aop/" title="Spring AOP"><img class="cover" src="https://blog-images-1317062290.cos.ap-chengdu.myqcloud.com/img/R-C%20(1).jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-16</div><div class="title">Spring AOP</div></div></a></div><div><a href="/2023/03/18/SpringMVC%E5%85%A5%E9%97%A8%E6%A1%88%E4%BE%8B%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/" title="SpringMVC入门案例工作流程"><img class="cover" src="https://blog-images-1317062290.cos.ap-chengdu.myqcloud.com/img/01ab3d554b9109000001bf72f5a54c.jpg@1280w_1l_2o_100sh.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-18</div><div class="title">SpringMVC入门案例工作流程</div></div></a></div><div><a href="/2023/03/15/SpringMVC%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/" title="SpringMVC获取请求参数的几种方式"><img class="cover" src="https://blog-images-1317062290.cos.ap-chengdu.myqcloud.com/img/15.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-15</div><div class="title">SpringMVC获取请求参数的几种方式</div></div></a></div><div><a href="/2023/04/06/lambda%E7%9A%84%E5%8F%8C%E5%86%92%E5%8F%B7%E8%AF%AD%E6%B3%95/" title="lambda的双冒号语法"><img class="cover" src="https://blog-images-1317062290.cos.ap-chengdu.myqcloud.com/img/0187585c5d8986a801203d22801adf.jpg@1280w_1l_2o_100sh.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-06</div><div class="title">lambda的双冒号语法</div></div></a></div><div><a href="/2023/03/22/%E4%BB%8E%E4%B8%8A%E5%88%B0%E4%B8%8B%E6%89%93%E5%8D%B0%E4%BA%8C%E5%8F%89%E6%A0%91/" title="从上到下打印二叉树"><img class="cover" src="https://blog-images-1317062290.cos.ap-chengdu.myqcloud.com/img/OIP-C.dDoGVZLhkR3WbOQ7FE_WBgHaDd" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-22</div><div class="title">从上到下打印二叉树</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://blog-images-1317062290.cos.ap-chengdu.myqcloud.com/img/author.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">coderzhn</div><div class="author-info__description">上了生活的贼船,就当个快乐海盗</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">41</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">75</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/coderzhn"><i class="fab fa-github"></i><span>Github</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/coderzhn" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget" id="card-poem"><div id="poem_sentence"></div><div id="poem_info"><div id="poem_dynasty"></div><div id="poem_author"></div></div></div><script src="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/poem/jinrishici.js" charset="utf-8"></script><script type="text/javascript">jinrishici.load(function(result) {
+var sentence = document.querySelector("#poem_sentence")
+var author = document.querySelector("#poem_author")
+var dynasty = document.querySelector("#poem_dynasty")
+
+var sentenceText = result.data.content
+sentenceText = sentenceText.substr(0, sentenceText.length - 1);
+sentence.innerHTML = sentenceText
+dynasty.innerHTML = result.data.origin.dynasty
+author.innerHTML = result.data.origin.author + '《' + result.data.origin.title + '》'
+});</script><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E8%BF%87%E6%BB%A4%E5%99%A8%EF%BC%88Filter%EF%BC%89"><span class="toc-text">一、什么是过滤器（Filter）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1%E3%80%81%E8%BF%87%E6%BB%A4%E5%99%A8%E5%B8%B8%E8%A7%81%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">1.1、过滤器常见的使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2%E3%80%81Springboot-%E6%95%B4%E5%90%88%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="toc-text">1.2、Springboot 整合过滤器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3%E3%80%81%E8%BF%87%E6%BB%A4%E5%99%A8%EF%BC%88Filter%EF%BC%89%E8%AF%A6%E8%A7%A3"><span class="toc-text">1.3、过滤器（Filter）详解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E6%8B%A6%E6%88%AA%E5%99%A8%EF%BC%88Interceptor%EF%BC%89"><span class="toc-text">二、什么是拦截器（Interceptor）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1%E3%80%81%E6%8B%A6%E6%88%AA%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">2.1、拦截器的使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2%E3%80%81springboot%E6%95%B4%E5%90%88%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="toc-text">2.2、springboot整合拦截器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3%E3%80%81%E6%8B%A6%E6%88%AA%E5%99%A8%E8%AF%A6%E6%83%85"><span class="toc-text">2.3、拦截器详情</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%8B%A6%E6%88%AA%E5%99%A8%E4%B8%8E%E8%BF%87%E6%BB%A4%E5%99%A8%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">三、拦截器与过滤器的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81AOP%E4%B8%8E%E8%BF%87%E6%BB%A4%E5%99%A8%E3%80%81%E6%8B%A6%E6%88%AA%E5%99%A8%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">四、AOP与过滤器、拦截器的区别</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/10/30/%E6%8B%A6%E6%88%AA%E5%99%A8%E3%80%81%E8%BF%87%E6%BB%A4%E5%99%A8%E3%80%81AOP%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB/" title="拦截器、过滤器、AOP的区别和联系"><img src="https://blog-images-1317062290.cos.ap-chengdu.myqcloud.com/img/20231030143518.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="拦截器、过滤器、AOP的区别和联系"/></a><div class="content"><a class="title" href="/2023/10/30/%E6%8B%A6%E6%88%AA%E5%99%A8%E3%80%81%E8%BF%87%E6%BB%A4%E5%99%A8%E3%80%81AOP%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB/" title="拦截器、过滤器、AOP的区别和联系">拦截器、过滤器、AOP的区别和联系</a><time datetime="2023-10-30T06:33:15.343Z" title="发表于 2023-10-30 14:33:15">2023-10-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/30/%E7%81%AB%E8%BD%A6%E8%B4%AD%E7%A5%A8%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E5%A4%8D%E7%9B%98/" title="火车购票系统项目复盘"><img src="https://blog-images-1317062290.cos.ap-chengdu.myqcloud.com/img/20231030111727.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="火车购票系统项目复盘"/></a><div class="content"><a class="title" href="/2023/10/30/%E7%81%AB%E8%BD%A6%E8%B4%AD%E7%A5%A8%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E5%A4%8D%E7%9B%98/" title="火车购票系统项目复盘">火车购票系统项目复盘</a><time datetime="2023-10-30T03:10:57.492Z" title="发表于 2023-10-30 11:10:57">2023-10-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/30/Mysql%E7%9A%84%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4/" title="Mysql的两阶段提交"><img src="https://blog-images-1317062290.cos.ap-chengdu.myqcloud.com/img/f45f50b5fb7a77d67e220bb65277d79.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Mysql的两阶段提交"/></a><div class="content"><a class="title" href="/2023/10/30/Mysql%E7%9A%84%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4/" title="Mysql的两阶段提交">Mysql的两阶段提交</a><time datetime="2023-10-30T02:47:28.854Z" title="发表于 2023-10-30 10:47:28">2023-10-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/24/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" title="JVM垃圾回收"><img src="https://blog-images-1317062290.cos.ap-chengdu.myqcloud.com/img/2647c7f211c639c9751d29e885b5646.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JVM垃圾回收"/></a><div class="content"><a class="title" href="/2023/10/24/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" title="JVM垃圾回收">JVM垃圾回收</a><time datetime="2023-10-23T23:35:32.739Z" title="发表于 2023-10-24 07:35:32">2023-10-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/15/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="分布式事务的解决方案"><img src="https://blog-images-1317062290.cos.ap-chengdu.myqcloud.com/img/ca09364ec0fc8f1169c83050f83d1e4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="分布式事务的解决方案"/></a><div class="content"><a class="title" href="/2023/10/15/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="分布式事务的解决方案">分布式事务的解决方案</a><time datetime="2023-10-15T02:43:28.026Z" title="发表于 2023-10-15 10:43:28">2023-10-15</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 By coderzhn</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://coderzhn.github.io">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">簡</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'zhn-5ggi4ft45f6ee1ea',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, "https://cdn.bootcdn.net/ajax/libs/twikoo/1.6.10/twikoo.all.min.js"))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'zhn-5ggi4ft45f6ee1ea',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.bootcdn.net/ajax/libs/twikoo/1.6.10/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script charset="UTF-8" id="LA_COLLECT" src="https://sdk.51.la/js-sdk-pro.min.js"></script><script src="https://sdk.51.la/perf/js-sdk-perf.min.js" crossorigin="anonymous"></script><script> LA.init({id:"{JzkRoUpT1TwOwKCH}",ck:"{JzkRoUpT1TwOwKCH}"})</script><script>new LingQue.Monitor().init({id:"JzkRoUpT1TwOwKCH",sendSuspicious:true});</script><link rel="stylesheet" href="https://cdnjs.sourcegcdn.com/ajax/libs/aplayer/1.10.1/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdnjs.sourcegcdn.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script><script src="https://cdnjs.sourcegcdn.com/ajax/libs/prism/1.27.0/prism.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax@VERSION/pjax.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
